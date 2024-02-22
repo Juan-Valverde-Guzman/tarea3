@@ -1,0 +1,19 @@
+<form (submit)="guardar()" [formGroup]="form">
+
+    <input type="text" formControlName="importe" placeholder="Importe de la factura" autocomplete="off"> <br> <br>
+
+    <select [(ngModel)]="clienteSeleccionado">
+    
+        <option value="0" disabled selected>-Seleccionar-</option>
+
+        <option *ngFor="let cliente of clientes" [value]="cliente">
+        
+            {{ cliente.nombre }} {{ cliente.apellidos }}
+
+        </option>
+
+    </select>
+
+    <button type="submit">Guardar factura</button>
+
+</form>
