@@ -27,4 +27,17 @@ public class ClienteService {
         return clienteFacturasDTOConverter.convertirEntityClienteFacturasDTO(cliente);
     }
 
+    public List<ClienteFacturasDTO> listOfClientes() {
+
+        List<Cliente> clientes = clienteRepository.findAll();
+
+        List<ClienteFacturasDTO> clienteFacturasDTOS = new ArrayList<>();
+
+        clientes.forEach( cliente -> {
+            clienteFacturasDTOS.add(clienteFacturasDTOConverter.convertirEntityClienteFacturasDTO(cliente));
+        });
+
+        return clienteFacturasDTOS;
+    }
+
 }

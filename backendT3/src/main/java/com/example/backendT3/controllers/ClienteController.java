@@ -15,6 +15,10 @@ public class ClienteController {
     @Autowired
     private ClienteService clienteService;
 
+    @GetMapping
+    public List<ClienteFacturasDTO> listDTO() { return clienteService.listOfClientes(); }
+
+
     @GetMapping({"/{nombre}"})
     public ClienteFacturasDTO listDTO(@PathVariable String nombre) { return clienteService.searchCliente(nombre); }
 }
