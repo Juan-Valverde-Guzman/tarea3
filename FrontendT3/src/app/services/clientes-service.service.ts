@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { cliente } from '../model/cliente';
+import { clienteDTO } from '../model/clienteDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -12,9 +12,15 @@ export class ClientesServiceService {
 
   constructor(private http:HttpClient) { }
 
-  getClientes() : Observable<cliente[]> {
+  getClientes() : Observable<clienteDTO[]> {
 
-    return this.http.get<cliente[]>(this.BASE_URL)
+    return this.http.get<clienteDTO[]>(this.BASE_URL)
+
+  }
+
+  getClienteNombre(nombre:string) : Observable<clienteDTO> {
+
+    return this.http.get<clienteDTO>(this.BASE_URL + "/" + nombre)
 
   }
 

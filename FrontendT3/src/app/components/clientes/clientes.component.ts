@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { clienteDTO } from 'src/app/model/clienteDTO';
 import { ClientesServiceService } from 'src/app/services/clientes-service.service';
 
 @Component({
@@ -9,25 +9,27 @@ import { ClientesServiceService } from 'src/app/services/clientes-service.servic
 })
 export class ClientesComponent {
 
-  clientes = [
-    {id:0, nombre:'', apellidos:''}
-  ]
+  clienteDTO: clienteDTO = {
+    id:0, nombre:'', apellidos:'', facturaImporte:[]
+  }
 
-  constructor(private clienteService:ClientesServiceService, private route:ActivatedRoute) {
+  nombreBusqueda: string = ''
 
-    this.getAllClientes()
+  constructor(private clienteService:ClientesServiceService) {
+
+    
 
   }
 
-  getAllClientes() {
+  buscarPorNombre() {
 
-    this.clienteService.getClientes().subscribe({
+    this.clienteService.getClienteNombre(this.nombreBusqueda).subscribe({
 
       next: res => {
 
         console.log(res)
 
-        this.clientes = res
+        this.clienteDTO = res
 
       },
 
@@ -36,5 +38,7 @@ export class ClientesComponent {
     })
 
   }
+
+  
 
 }

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { cliente } from 'src/app/model/cliente';
+import { clienteDTO } from 'src/app/model/clienteDTO';
 import { factura } from 'src/app/model/factura';
 import { ClientesServiceService } from 'src/app/services/clientes-service.service';
 import { FacturasServiceService } from 'src/app/services/facturas-service.service';
@@ -14,19 +14,9 @@ export class FacturasComponent {
 
   form:FormGroup
 
-  factura: factura = {
-
-    importe:'',
-
-    cliente: {id:0, nombre:'', apellidos:''}
-    
-  }
-
-  clientes = [
-    {id:0, nombre:'', apellidos:''}
+  clientesDTO = [
+    {id:0, nombre:'', apellidos:'', facturaImporte:[]}
   ]
-
-  clienteSeleccionado: cliente | undefined;
 
   constructor(private clienteService:ClientesServiceService, private formBuilder:FormBuilder, private facturaService:FacturasServiceService) {
 
@@ -34,7 +24,9 @@ export class FacturasComponent {
 
     this.form = this.formBuilder.group({
 
-      "importe": ''
+      "importe": 0,
+
+      "clienteSeleccionadoId": 0
 
     })
 
@@ -48,7 +40,7 @@ export class FacturasComponent {
 
         console.log(res)
 
-        this.clientes = res
+        this.clientesDTO = res
 
       },
 
@@ -60,9 +52,28 @@ export class FacturasComponent {
 
   guardar() {
 
-    this.factura.importe = this.form.get('importe')?.value
+    let factura: factura = {
+      importe: this.form.get('importe')?.value,
+      cliente: {
+        id: this.form.get('clienteSeleccionadoId')?.value
+      }
+    }
 
-    this.factura.cliente = this.clienteSeleccionado
+    console.log(this.form.get('clienteSeleccionadoId')?.value)
+
+    console.log(factura)
+
+    this.facturaService.postFactura(factura).subscribe({
+
+      next: res => {
+
+        console.log(res)
+
+      },
+
+      error: err => console.log(err)
+
+    })
 
   }
 

@@ -5,7 +5,7 @@ import { FacturasComponent } from './components/facturas/facturas.component';
 
 const routes: Routes = [
   {path: 'cliente', component: ClientesComponent},
-  {path: 'facturas', component: FacturasComponent},
+  {path: 'factura', component: FacturasComponent},
   {path: '**', redirectTo:'cliente'}
 ];
 

@@ -11,6 +11,8 @@ import java.util.List;
 @AllArgsConstructor
 public class ClienteFacturasDTO {
 
+    private Long id;
+
     private String nombre;
 
     private String apellidos;

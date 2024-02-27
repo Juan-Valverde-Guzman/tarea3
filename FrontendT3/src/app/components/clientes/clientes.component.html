@@ -1,7 +1,13 @@
-<p *ngFor="let cliente of clientes">
+<form>
 
-    <li>{{ cliente.nombre }}</li>
+    <input type="text" [(ngModel)]="nombreBusqueda" name="nombreBusqueda" autocomplete="off" placeholder="Nombre cliente" (keyup)="buscarPorNombre()"/>
 
-    <li>{{ cliente.apellidos }}</li>
+</form>
 
-</p>
+<br>
+
+<div *ngIf="clienteDTO">
+
+    Nombre: {{clienteDTO.nombre}} <br>  Apellidos: {{clienteDTO.apellidos}} <br>  Facturas: {{clienteDTO.facturaImporte}}
+
+</div>

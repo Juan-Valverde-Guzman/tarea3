@@ -15,6 +15,8 @@ public class ClienteFacturasDTOConverter {
 
         ClienteFacturasDTO clienteFacturasDTO = new ClienteFacturasDTO();
 
+        clienteFacturasDTO.setId(cliente.getId());
+
         clienteFacturasDTO.setNombre(cliente.getNombre());
 
         clienteFacturasDTO.setApellidos(cliente.getPrimerApellido() + " " + cliente.getSegundoApellido());
